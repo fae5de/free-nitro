@@ -1,6 +1,6 @@
 // Prompt user for configuration input
-const userCodesToGenerate = prompt('How much Nitro do you want?:', '5');
-const userDelay = prompt('Enter delay in milliseconds per code (So opera doesn\'t get suspicious about it):', '1000');
+const userCodesToGenerate = prompt('Wie viel Nitro brauchst du?:', '5');
+const userDelay = prompt('Gebe ein Delay ein, sodass Ratelimits vermeidet werden:', '1000');
 
 const CodesToGenerate = parseInt(userCodesToGenerate) || 5;
 const Delay = parseInt(userDelay) || 1000;
@@ -60,11 +60,11 @@ async function generatePromoCodeLinks() {
 }
 
 async function displayPromoCodeLinks() {
-		alert('Links are being generated. Estimated wait time: ' + (CodesToGenerate * Delay) / 1000 + ' Seconds');
+		alert('Deine Links werden generiert. Du musst ungefähr: ' + (CodesToGenerate * Delay) / 1000 + ' Sekunden warten');
     try {
 				document.body.innerHTML = '';
         const estimatedTime = document.createElement('p');
-        estimatedTime.textContent = 'Time you had to wait: ' + (CodesToGenerate * Delay) / 1000 + ' Seconds';
+        estimatedTime.textContent = 'Zeit die du warten musstest/abwarten musst: ' + (CodesToGenerate * Delay) / 1000 + ' Seconds';
         document.body.appendChild(estimatedTime);
 
         const links = await generatePromoCodeLinks();
@@ -80,7 +80,7 @@ async function displayPromoCodeLinks() {
             listItem.appendChild(linkElement);
             linksList.appendChild(listItem);
         });
-				alert('Yay! Enjoy the free nitro! (If you have issues redeeming, contact FAE5: email@fae5.de)')
+				alert('Yay! Viel Spaß mit Nitro! Noch Fragen? Wende dich an: email@fae5.de)')
 
         document.body.innerHTML = '';
 
@@ -94,17 +94,17 @@ async function displayPromoCodeLinks() {
         document.body.appendChild(estimatedTime);
 
         const copyButton = document.createElement('button');
-        copyButton.textContent = 'Copy All';
+        copyButton.textContent = 'Alles kopieren';
         copyButton.style.position = 'absolute';
         copyButton.style.top = '10px';
         copyButton.style.right = '10px';
         copyButton.addEventListener('click', () => {
             copyToClipboard(links);
-            alert('Copied to clipboard!');
+            alert('Kopiert!');
         });
         document.body.appendChild(copyButton);
     } catch (error) {
-        console.error('Error generating promo code links:', error);
+        console.error('FEHLER:', error);
     }
 }
 
@@ -118,5 +118,5 @@ function copyToClipboard(links) {
     document.body.removeChild(textarea);
 }
 
-console.log('Your Nitro\'s are being generated. Estimated wait time: ' + (CodesToGenerate * Delay) / 1000 + ' seconds');
+console.log('Deine Nitros werden generiert. Du musst wahrscheinlich: ' + (CodesToGenerate * Delay) / 1000 + ' Sekunden warten');
 displayPromoCodeLinks();
